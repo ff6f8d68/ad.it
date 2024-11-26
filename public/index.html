@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ad.it - Free Advertising</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Welcome to ad.it</h1>
+    <form id="adForm">
+        <label for="imageUrl">Image URL:</label>
+        <input type="url" id="imageUrl" name="imageUrl" required>
+        <br>
+        <label for="link">Website/Download Link:</label>
+        <input type="url" id="link" name="link" required>
+        <br>
+        <button type="submit">Submit Ad</button>
+    </form>
+    <p id="message"></p>
+
+    <script>
+        const form = document.getElementById('adForm');
+        const message = document.getElementById('message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const imageUrl = document.getElementById('imageUrl').value;
+            const link = document.getElementById('link').value;
+
+            try {
+                const response = await fetch('/api/ads/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ imageUrl, link }),
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    message.textContent = 'Ad submitted successfully!';
+                    form.reset();
+                } else {
+                    message.textContent = `Error: ${data.error}`;
+                }
+            } catch (err) {
+                message.textContent = 'An error occurred.';
+            }
+        });
+    </script>
+</body>
+</html>
