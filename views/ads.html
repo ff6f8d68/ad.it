@@ -6,7 +6,6 @@
     <title>Random Ad</title>
 </head>
 <body>
-    <h1>Your Random Ad</h1>
     <div id="adContainer"></div>
 
     <script>
@@ -17,8 +16,9 @@
                 if (response.ok) {
                     const adContainer = document.getElementById('adContainer');
                     adContainer.innerHTML = `
-                        <img src="${ad.imageUrl}" alt="Ad Image" style="max-width:100%;">
-                        <p><a href="${ad.link}" target="_blank">Visit Link</a></p>
+                        <a href="${ad.link}" target="_blank">
+                            <img src="${ad.imageUrl}" alt="Ad Image">
+                        </a>
                     `;
                 } else {
                     document.body.innerHTML = `<p>Error: ${ad.error}</p>`;
