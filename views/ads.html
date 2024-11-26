@@ -9,10 +9,16 @@
     <div id="adContainer"></div>
 
     <script>
+        // Get the size parameter from the URL (e.g., ?size=100x100)
+        const urlParams = new URLSearchParams(window.location.search);
+        const size = urlParams.get('size') || 'medium';  // Default to 'medium' if no size is provided
+
         async function fetchAd() {
             try {
-                const response = await fetch('/api/ads/serve');
+                // Fetch the ad with the specified size
+                const response = await fetch(`/api/ads/serve/${size}`);
                 const ad = await response.json();
+                
                 if (response.ok) {
                     const adContainer = document.getElementById('adContainer');
                     adContainer.innerHTML = `
