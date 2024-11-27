@@ -31,6 +31,14 @@ app.get('/ads', (req, res) => {
     res.sendFile(__dirname + '/views/ads.html');
 });
 
+app.get('/google697e2d7184599b2d.html', (req, res) => {
+    res.sendFile(__dirname + '/public/google697e2d7184599b2d.html');
+});
+
+app.get('/google697e2d7184599b2d', (req, res) => {
+    res.sendFile(__dirname + '/public/google697e2d7184599b2d.html');
+});
+
 // Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
